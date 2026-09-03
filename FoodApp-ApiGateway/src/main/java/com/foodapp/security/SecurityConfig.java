@@ -62,6 +62,9 @@ public class SecurityConfig {
 	            		.pathMatchers("/orders/allOrders")
 	            		.hasRole("ADMIN")
 
+	            		.pathMatchers("/admin/all")
+	            		.hasRole("ADMIN")
+
 	            		.pathMatchers(HttpMethod.GET, "/admin/**")
 	            		.hasAnyRole("USER", "ADMIN")
 

@@ -99,7 +99,6 @@ function UserDashboard({ apiRequest, onLogout }) {
       </div>
 
       <div className="mb-4 d-flex flex-wrap gap-2">
-        <button className="btn btn-success" onClick={() => apiRequest('GET', '/admin/all')}>View All Foods</button>
         <button className="btn btn-success" onClick={() => apiRequest('GET', '/admin/available')}>View Available Foods</button>
       </div>
 
