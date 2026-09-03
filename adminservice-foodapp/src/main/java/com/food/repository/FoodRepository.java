@@ -17,7 +17,7 @@ public interface FoodRepository extends JpaRepository<Food, Integer> {
 
 
     // Find Food By Category
-    List<Food> findByCategory(String category);
+    List<Food> findByCategoryContainingIgnoreCase(String category);
 
     // Find Food Below Particular Price
     List<Food> findByPriceLessThan(Double price);

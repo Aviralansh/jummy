@@ -157,9 +157,10 @@ function UserDashboard({ apiRequest, onLogout }) {
           <div className="card shadow p-4 h-100">
             <h3 className="text-primary mb-3">Food Orders</h3>
             <div className="input-group mb-2">
+              <input className="form-control" placeholder="User ID" type="number" value={order.userId || ''} onChange={e => setOrder({...order, userId: e.target.value})} />
               <input className="form-control" placeholder="Food ID" type="number" value={order.foodId} onChange={e => setOrder({...order, foodId: e.target.value})} />
               <input className="form-control" placeholder="Quantity" type="number" value={order.quantity} onChange={e => setOrder({...order, quantity: e.target.value})} />
-              <button className="btn btn-success" onClick={() => apiRequest('POST', '/orders/placeorder', { userId: profile.userId, foodId: order.foodId, quantity: order.quantity })}>Place Order</button>
+              <button className="btn btn-success" onClick={() => apiRequest('POST', '/orders/placeorder', { userId: order.userId, foodId: order.foodId, quantity: order.quantity })}>Place Order</button>
             </div>
             
             <div className="input-group mb-2 mt-4">

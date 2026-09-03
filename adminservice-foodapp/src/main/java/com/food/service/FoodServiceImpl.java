@@ -97,7 +97,7 @@ public class FoodServiceImpl implements FoodService {
 
         logger.info("Fetching foods by category : {}", category);
 
-        return foodRepository.findByCategory(category);
+        return foodRepository.findByCategoryContainingIgnoreCase(category);
     }
 
     @Override
