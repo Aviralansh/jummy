@@ -89,6 +89,7 @@ function AdminDashboard({ apiRequest, onLogout }) {
 function UserDashboard({ apiRequest, onLogout }) {
   const [profile, setProfile] = useState({ userId: '', name: '', email: '', phonenumber: '', address: '' });
   const [order, setOrder] = useState({ orderId: '', foodId: '', quantity: '' });
+  const [search, setSearch] = useState({ id: '', category: '', maxPrice: '', minPrice: '' });
 
   return (
     <div>
@@ -97,12 +98,40 @@ function UserDashboard({ apiRequest, onLogout }) {
         <button className="btn btn-danger" onClick={onLogout}>Logout</button>
       </div>
 
-      <div className="mb-4">
-        <button className="btn btn-success me-2" onClick={() => apiRequest('GET', '/admin/all')}>View All Foods</button>
+      <div className="mb-4 d-flex flex-wrap gap-2">
+        <button className="btn btn-success" onClick={() => apiRequest('GET', '/admin/all')}>View All Foods</button>
         <button className="btn btn-success" onClick={() => apiRequest('GET', '/admin/available')}>View Available Foods</button>
       </div>
 
       <div className="row">
+        {/* Find Food */}
+        <div className="col-12 mb-4">
+          <div className="card shadow p-4">
+            <h3 className="text-primary mb-3">Search Menu</h3>
+            <div className="row">
+              <div className="col-md-4">
+                <div className="input-group mb-2">
+                  <input className="form-control" placeholder="Category" value={search.category} onChange={e => setSearch({...search, category: e.target.value})} />
+                  <button className="btn btn-outline-primary" onClick={() => apiRequest('GET', `/admin/category/${search.category}`)}>Search Category</button>
+                </div>
+              </div>
+              <div className="col-md-4">
+                <div className="input-group mb-2">
+                  <input className="form-control" placeholder="Max Price" type="number" value={search.maxPrice} onChange={e => setSearch({...search, maxPrice: e.target.value})} />
+                  <button className="btn btn-outline-primary" onClick={() => apiRequest('GET', `/admin/belowprice/${search.maxPrice}`)}>Below Price</button>
+                </div>
+              </div>
+              <div className="col-md-4">
+                <div className="input-group mb-2">
+                  <input className="form-control" placeholder="Min" type="number" value={search.minPrice} onChange={e => setSearch({...search, minPrice: e.target.value})} />
+                  <input className="form-control" placeholder="Max" type="number" value={search.maxPrice} onChange={e => setSearch({...search, maxPrice: e.target.value})} />
+                  <button className="btn btn-outline-primary" onClick={() => apiRequest('GET', `/admin/between/${search.minPrice}/${search.maxPrice}`)}>Between</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Profile Management */}
         <div className="col-md-6 mb-4">
           <div className="card shadow p-4 h-100">
